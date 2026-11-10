@@ -2,21 +2,44 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Calzado Cobán</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zapatería Calzado Cobán</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
 
-    <nav>
-        <a href="/clientes">Calzado Cobán</a> | 
-        <a href="{{ route('clientes.index') }}">Ver Clientes</a> | 
-        <a href="{{ route('clientes.create') }}">Nuevo Cliente</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{{ route('productos.index') }}">👞 Calzado Cobán</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="{{ route('productos.index') }}">Inventario (Zapatos)</a>
+                    <a class="nav-link" href="{{ route('marcas.index') }}">Marcas</a>
+                    <a class="nav-link" href="{{ route('clientes.index') }}">Clientes</a>
+                    <a class="nav-link" href="{{ route('ventas.index') }}">Ventas</a>
+                    <a class="nav-link text-warning fw-bold" href="{{ route('api.inventario') }}" target="_blank">API JSON</a>
+                </div>
+            </div>
+        </div>
     </nav>
 
-    <hr>
+    <main class="container pb-5">
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-    <div>
         @yield('content')
-    </div>
+    </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

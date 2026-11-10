@@ -1,33 +1,26 @@
-
 <?php
 
-
-
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\ClienteController;
-
-
+use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\VentaController;
 
 Route::get('/', function () {
-
-    return view('welcome');
-
+    return redirect()->route('productos.index');
 });
 
+// Rutas de Clientes
+Route::resource('clientes', ClienteController::class)->except(['show']);
 
+// Rutas de Marcas
+Route::resource('marcas', MarcaController::class)->only(['index', 'store', 'destroy']);
 
-// Rutas para el módulo de Clientes
+// Rutas de Productos (Inventario y Tallas)
+Route::resource('productos', ProductoController::class)->except(['show']);
 
-Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
+// Rutas de Ventas
+Route::resource('ventas', VentaController::class)->only(['index', 'store', 'destroy']);
 
-Route::get('/clientes/crear', [ClienteController::class, 'create'])->name('clientes.create');
-
-Route::get('/clientes/{cliente}', [ClienteController::class, 'show'])->name('clientes.show'); 
-
-
-
-
-
- 
-
+// Endpoint de API REST propia (Requisito técnico del curso)
+Route::get('/api/inventario', [ProductoController::class, 'apiIndex'])->name('api.inventario');
