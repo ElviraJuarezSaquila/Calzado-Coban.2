@@ -15,13 +15,27 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link" href="{{ route('productos.index') }}">Inventario (Zapatos)</a>
-                    <a class="nav-link" href="{{ route('marcas.index') }}">Marcas</a>
-                    <a class="nav-link" href="{{ route('clientes.index') }}">Clientes</a>
-                    <a class="nav-link" href="{{ route('ventas.index') }}">Ventas</a>
-                    <a class="nav-link text-warning fw-bold" href="{{ route('api.inventario') }}" target="_blank">API JSON</a>
-                </div>
+                @auth
+                    <div class="navbar-nav me-auto">
+                        <a class="nav-link" href="{{ route('productos.index') }}">Inventario (Zapatos)</a>
+                        @if(auth()->user()->rol === 'admin')
+                            <a class="nav-link" href="{{ route('marcas.index') }}">Marcas</a>
+                        @endif
+                        <a class="nav-link" href="{{ route('clientes.index') }}">Clientes</a>
+                        <a class="nav-link" href="{{ route('ventas.index') }}">Ventas</a>
+                        <a class="nav-link text-warning fw-bold" href="{{ route('api.inventario') }}" target="_blank">API JSON</a>
+                    </div>
+                    <div class="d-flex align-items-center text-white">
+                        <span class="me-2 small">{{ auth()->user()->name }}</span>
+                        <span class="badge {{ auth()->user()->rol === 'admin' ? 'bg-danger' : 'bg-info text-dark' }} me-3 text-uppercase">
+                            {{ auth()->user()->rol }}
+                        </span>
+                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-light btn-sm">Salir</button>
+                        </form>
+                    </div>
+                @endauth
             </div>
         </div>
     </nav>
