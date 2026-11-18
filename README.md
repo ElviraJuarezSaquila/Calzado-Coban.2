@@ -29,5 +29,5 @@ El sistema cuenta con **4 entidades principales relacionadas** en MySQL:
 1. **Requisitos previos:** PHP 8.2+, Composer, MySQL (XAMPP) y Laravel Herd (o servidor integrado de Artisan).
 2. **Clonar el repositorio y entrar a la carpeta del proyecto:**
    ```bash
-   git clone <URL_DEL_REPOSITORIO>
+   git clone <https://github.com/ElviraJuarezSaquila/Calzado-Coban.2>
    cd calzado-coban
